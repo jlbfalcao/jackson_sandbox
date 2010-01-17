@@ -5,8 +5,10 @@ package test;
  * Fake Object (model)
  */
 public class Fake {
+
     public String field1;
     public Integer field2;
+
 
     public Fake() {
     }

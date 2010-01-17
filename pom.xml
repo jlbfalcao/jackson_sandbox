@@ -301,11 +301,42 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.7.2</version>
+        </dependency>
+
+
     </dependencies>
 
 
     <build>
         <plugins>
+
+
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <version>2.12.2</version>
+                <configuration>
+                    <scalaVersion>2.7.2</scalaVersion>
+
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+
+            </plugin>
+
+
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>

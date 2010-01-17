@@ -25,9 +25,9 @@ public class FakeRepository {
     public List<Fake> getList() {
         List<Fake> list = new LinkedList<Fake>();
 
-        list.add(new Fake("field1", 55));
-        list.add(new Fake("field1", 55));
-        list.add(new Fake("field1", 55));
+        list.add(new Fake("field1", 1));
+        list.add(new Fake("field1", 2));
+        list.add(new Fake("field1", 3));
 
 
         return list;
