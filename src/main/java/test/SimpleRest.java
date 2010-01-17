@@ -116,31 +116,91 @@ public class SimpleRest {
 
 
     /**
-     * Todo: Exemplo de put
+     * Esse exemplo não funcionou, mas a idéia é usar quando um objeto tiver uma lista.
+     *
+     * > /usuario/1/amigos
+     *
+     * @param model
+     * @param id
+     * @param f
+     * @param map
+     * @return
+     */
+
+    @RequestMapping(value = "/{model}/{id}/{f}", method = RequestMethod.GET)
+    public String getFieldList(@PathVariable String model, @PathVariable String id, @PathVariable String f, ModelMap map) {
+
+        System.out.println(model);
+        System.out.println("context=" + context);
+
+        try {
+
+            Object o = context.getBean(String.format("%sRepository", model));
+
+            // validar se tem uma determinada anotação
+            System.out.println("is_component=" + o.getClass().isAnnotationPresent(Component.class));
+
+            // qual objeto?
+            System.out.println("object=" + o.getClass().getName());
+
+
+            Object entity = o.getClass().getMethod("getById", Integer.class).invoke(o, Integer.parseInt(id));
+
+            map.addAttribute(entity.getClass().getMethod(String.format("get%s", f )).invoke(entity));
+
+
+        } catch (NoSuchBeanDefinitionException ex) {
+
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        return ""; //
+    }
+
+
+    /**
+     * Some put test.
      *
      * @param body
      * @param map
      * @throws IOException
      */
-    @RequestMapping(method = RequestMethod.PUT)
-    public void handle(@RequestBody String body, ModelMap map) throws IOException {
+    @RequestMapping(value = "/{model}/{id}", method = RequestMethod.PUT)
+    public void handle(@PathVariable String model, @PathVariable String id,
+                       @RequestBody String body, ModelMap map) throws IOException {
+
+        System.out.println(model);
+        System.out.println("context=" + context);
+
+        try {
+
+            Object o = context.getBean(String.format("%sRepository", model));
+
+            // validar se tem uma determinada anotação
+            System.out.println("is_component=" + o.getClass().isAnnotationPresent(Component.class));
+
+            // qual objeto?
+            System.out.println("object=" + o.getClass().getName());
 
 
-//        ObjectMapper mapper = new ObjectMapper();
-//
-//        Modelo value = mapper.readValue(body, Modelo.class);
-//
-//        System.out.println(value);
-//
-//        System.out.println(value.getNome());
-//        System.out.println(value.getEmail());
-//        System.out.println(value.getNomes());
-//
-////        writer.write(body);
-//        System.out.println(body);
-////
-//        map.addAttribute("status", "OK");
-//
+            map.addAttribute("model", o.getClass().getMethod("update", Integer.class).invoke(o, Integer.parseInt(id)));
+
+
+        } catch (NoSuchBeanDefinitionException ex) {
+
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
 
     }
 

@@ -13,6 +13,10 @@ import java.util.List;
 public class FakeRepository {
 
 
+    public Class<?> getModel() {
+        return Fake.class;
+    }
+
     public Fake getById(Integer id) {
         return new Fake("value1", 10);
     }
@@ -29,5 +33,17 @@ public class FakeRepository {
         return list;
 
     }
+
+    public void delete(Integer id) {
+    }
+
+    public void update(Fake e) {
+
+    }
+
+    public void create(Fake e) {
+
+    }
+
 
 }
