@@ -1,0 +1,4 @@
+
+
+# Loading
+curl -v -H "Accept: application/json" http://localhost:8080/jackson/fake
